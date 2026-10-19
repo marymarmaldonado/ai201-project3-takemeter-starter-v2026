@@ -42,6 +42,14 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
+TakeMeter is a text classification project that analyzes public
+Reddit posts from r/Sephora, a community focused on beauty products,
+shopping experiences, and recommendations.
+
+The goal is to train a machine learning model that categorizes posts
+based on the type of discussion they contain. This project explores
+how fine-tuning a pretrained language model can help identify
+different patterns in online beauty discussions.
 
 
 ---
