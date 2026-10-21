@@ -51,63 +51,44 @@ whether you hit them:
 
 ---
 
-## 1.
+## 1. Overall Classification Accuracy
 
 <!-- Your criterion. It must name a number. -->
+The model must achieve an overall accuracy of at least 0.65 (65%) on the held-out test set.
 
-
-
-**Why this target:**
-
-
+**Why this target:** My classifier distinguishes between three types of Sephora discussions: advice requests, product experiences, and opinions or complaints. With three approximately balanced labels, random guessing would achieve about 33% accuracy. I chose 65% because it represents a meaningful improvement while accounting for posts that naturally overlap categories.
 
 ---
 
-## 2.
+## 2. Per-Label F1-Score
 
-<!-- Your criterion. -->
+Each of the three labels (`advice_request`, `product_experience`, and `opinion_complaint`) must achieve an F1-score of at least 0.55 on the held-out test set.
 
-
-
-**Why this target:**
-
-
+**Why this target:** The distinction between advice requests and product experiences is particularly challenging because users often describe products they have tried before asking for recommendations. With approximately 200 posts divided into three categories, each label will have relatively few held-out examples. An F1-score of 0.55 provides a reasonable minimum while preventing the model from completely ignoring a difficult category.
 
 ---
 
-## 3.
+## 3. Dataset Balance
 
-<!-- Your criterion. -->
+No individual label may represent more than 50% of the complete labeled dataset of at least 200 posts.
 
-
-
-**Why this target:**
-
-
+**Why this target:** The three categories should be sufficiently represented so the model can learn their differences. Product recommendations and reviews are common discussions in r/Sephora, so I want to prevent one category from dominating the training data. A maximum of 50% per label is stricter than the project's required 70% limit and encourages a more balanced dataset.
 
 ---
 
-## 4.
+## 4. Labeling Consistency
 
-<!-- Your criterion. -->
+Two independent annotators using the same taxonomy and decision rules must agree on at least 80% of a shared sample of 30 posts.
 
-
-
-**Why this target:**
-
-
+**Why this target:** My labels depend on identifying the primary purpose of each post rather than judging whether the content is good or bad. The written decision rules should help annotators consistently distinguish between firsthand product reviews, recommendation requests, and general complaints. I chose 80% because some overlap is expected, but most posts should have a clear classification.
 
 ---
 
-## 5.
+## 5. Advice Request Recall
 
-<!-- Your criterion. -->
+The model must achieve a recall of at least 0.65 (65%) for the `advice_request` label on the held-out test set.
 
-
-
-**Why this target:**
-
-
+**Why this target:** Recommendation requests are an important part of the Sephora community. Some users mention previous product experiences before asking for new suggestions, making these posts easy to confuse with `product_experience`. A recall target of 65% means the classifier should correctly identify at least 65% of actual advice requests, even when their wording includes other discussion types.
 
 ---
 
