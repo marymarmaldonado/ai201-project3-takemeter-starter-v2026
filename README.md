@@ -62,35 +62,83 @@ different patterns in online beauty discussions.
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `advice_request`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** A post primarily asking other community members for beauty product recommendations, comparisons, or guidance.
 
 **Example 1:**
->
+>"Foundation recommendations please!!"
+https://www.reddit.com/r/Sephora/comments/1wnlkah/
+The author asks for foundation recommendations that work
+with combination skin and do not emphasize fine lines.
 
 **Example 2:**
->
+>"Foundation recommends"
+https://www.reddit.com/r/Sephora/comments/1r2a6vy/
+The author asks for a full-coverage foundation that
+can cover freckles while matching their light skin tone.
+
+### `product_experience`
+
+**Definition:** A post primarily sharing firsthand observations or evaluations of beauty products the author has personally tried.
+
+**Example 1:**
+>"POV Beauty in depth review"
+https://www.reddit.com/r/Sephora/comments/1wb2q99/
+
+The author shares detailed impressions of beauty
+products they personally swatched at Sephora.
+
+**Example 2:**
+>"Honestly Reviewing Sephora lippies"
+https://www.reddit.com/r/Sephora/comments/1gogh94/
+
+The author shares reviews and opinions about
+multiple lip products available at Sephora.
+
+
+### `opinion_complaint`
+
+**Definition:** A post primarily expressing a personal judgment,
+frustration, or criticism about beauty brands, retailers, or
+shopping experiences rather than reviewing product performance.
+
+**Example 1:**
+"Disappointing birthday rewards"
+https://www.reddit.com/r/Sephora/comments/1t5xvqo/
+
+The author expresses dissatisfaction with Sephora's
+birthday reward options.
+
+**Example 2:**
+"Is Sephora declining or is it just me?"
+https://www.reddit.com/r/Sephora/comments/1gp4ec9/
+
+The author criticizes changes in Sephora's customer
+service, shipping, and loyalty program.
+
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `advice_request` and `product_experience`
 
 **The decision rule I used every time:**
 <!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
      if the tone is heated." -->
 
+If a post describes a personal experience with a product but
+primarily asks for recommendations or help choosing another
+product, I classify it as `advice_request`.
 
+If the post primarily describes how a product performed for
+the author without making advice its main purpose, I classify
+it as `product_experience`.
+
+For posts that overlap with `opinion_complaint`, I focus on
+the primary purpose. Firsthand product performance reviews
+belong to `product_experience`, while general criticisms of
+Sephora's customer service, rewards, or shopping experience
+belong to `opinion_complaint`.
 
 ---
 
