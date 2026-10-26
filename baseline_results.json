@@ -1,0 +1,89 @@
+{
+  "model": "facebook/bart-large-mnli",
+  "n": 11,
+  "seed": 42,
+  "held_out": true,
+  "used_definitions": true,
+  "scores": {
+    "n": 11,
+    "accuracy": 0.7272727272727273,
+    "f1_macro": 0.7333333333333334,
+    "per_label": {
+      "advice_request": {
+        "precision": 0.8571428571428571,
+        "recall": 0.75,
+        "f1": 0.7999999999999999,
+        "support": 8
+      },
+      "opinion_complaint": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1
+      },
+      "product_experience": {
+        "precision": 0.3333333333333333,
+        "recall": 0.5,
+        "f1": 0.4,
+        "support": 2
+      }
+    }
+  },
+  "predictions": [
+    {
+      "text": "Powder blush (different brand) to set saie liquid blush in spicy?\r\n\r\n[Question]\r\n\r\nWhat powder blush would you recommend to set this liquid blush? I love the saie powder blush I have in a different shade, but they don't have one that I think matches this one well. I wandered around the sephora close to me the other day and didn't really see one that is this combo of warm red and brown.\r\n\r\nShade: Spicy (warm terracotta)",
+      "gold": "advice_request",
+      "predicted": "advice_request"
+    },
+    {
+      "text": "Deinfluence me\r\n\r\n[Advice]\r\n\r\nLast few items are restocks. I have normal to oily skin btw. Any opinions welcome!!\r\n\r\nProducts list:\r\n\r\nNARS Insatiable Longwearing Liquid Blush \u2013 Fast Ride\r\nRhode Peptide Lip Tint \u2013 Salty Tan\r\nYSL Skin Affair Soft Glow Cushion Foundation \u2013 LN1\r\nArmani Beauty Eye Tint Liquid Eyeshadow \u2013 22M Cashew\r\nGivenchy Prisme Libre Blurring & Color-Correcting Matte Pressed Powder \u2013 03 Voile Rose\r\nWestman Atelier Baby Cheeks Blush Stick \u2013 Petal\r\nILIA Skin Blur Serum Concealer \u2013 Challis 6N\r\nYSL Candy Glaze Lip Gloss Stick \u2013 18 Bubble Gum\r\nCaudalie Beauty Elixir Face Mist \u2013 100 mL\r\nDior Forever Skin Cream Contour Stick \u2013 01 Light\r\nNARS Soft Matte Complete Concealer \u2013 Vanilla\r\nDior Forever Skin Correct Concealer \u2013 1.5 Neutral\r\nPat McGrath Labs LUST Lip Gloss \u2013 Love Potion\r\nCharlotte Tilbury Airbrush Flawless Finish Setting Powder Refill \u2013 1 Fair\r\nHuda Beauty Easy Bake Loose Setting Powder \u2013 Pound Cake\r\nRare Beauty Jumbo Brow Harmony Laminating Eyebrow Gel \u2013 Clear",
+      "gold": "advice_request",
+      "predicted": "product_experience"
+    },
+    {
+      "text": "m.ph and Rhode gift sets\r\n\r\n[Question]\r\n\r\nI have a rouge code and am considering the m.ph lipstick and liner set and the rhode mauve lip balm and blush set. I have only read about Rhode and never heard of m.ph at all. Anyone try either of these? Your opinions are appreciated!",
+      "gold": "advice_request",
+      "predicted": "advice_request"
+    },
+    {
+      "text": "Danessa Myricks Lightwork VIII Swatches! \u2728\r\n\r\nI decided to take a video to show the shades as accurately as possible. This palette is so beautiful!! I know people were disappointed by the shades this year, but it\u2019s the first DM lightwork palette that\u2019s 100% wearable for me. I know I\u2019ll use all of these shades regularly so it\u2019s worth it. I love that she\u2019s making something for everyone in the makeup community every year. The formulas are incredible!!! I needed to use my rouge reward on something so this was a perfect purchase for me \ud83d\udc9b\u2728\r\n\r\nI have medium-tan neutral olive skin! Also, my video was great quality but Reddit\u2019s processing sucks \ud83e\udee0",
+      "gold": "product_experience",
+      "predicted": "product_experience"
+    },
+    {
+      "text": "UPDATE: My last dollars spent here- EVER\r\n\r\nI made a post last night about my package missing 7 of my 8 items I ordered. This was a $321.84 order I placed during the friends and family sale. I was told by two associates, one on chat, one on the phone and then a phone supervisor as well, that there was nothing they could do because the weight of the package showed as if all the products were in there (so this was obviously an inside job in a warehouse- IMO).\r\n\r\nAnyway, I read through so many of your guys helpful comments, recommending chargebacks with my card, filing a complaint with BBB, messaging LinkedIn higher ups and Sephoras social media profiles, and continuing to call. I am very happy to say that a resolution has been made with this order. So in case anyone else has had this issue with no resolution yet, here is what I did. I filed a complaint with the BBB, and I listed the San Francisco location (I googled where their main office is and that location is what came up). I wrote in as much detail as possible what happened, I included photos of my package and the one item in it, I included the chat messages with Sephora where they said there is nothing they could do, and I included screenshots of the original order from the Sephora app showing what I was supposed to receive, the total spent, and the order number.\r\n\r\nI filed this complaint at 11:55pm last night, got a confirmation email from the BBB this morning at 10:54am saying they had accepted this case and forwarded along to Sephora. Then today at 2:04pm I got an email from Sephora Client Relations saying they have seen the complaint with the BBB and have issued me a refund for $277.33 (the total minus the body lotion +tax for that item).\r\n\r\nI still stand firm in my decision to not spend another penny at this store. The way I was treated was horrendous as someone who has been a loyal rouge member for many, many years and having to go through these lengths should not be necessary. So be warned, if you insist on shopping this store, do it in person. For me, I\u2019ll stick with ordering directly from the brand\u2019s websites. They have better deals anyway. Thank you all for your kind advice! I really appreciate you all!",
+      "gold": "opinion_complaint",
+      "predicted": "opinion_complaint"
+    },
+    {
+      "text": "Tell me about your fav shine control products to use WITHOUT makeup? \ud83e\ude84\u2728\r\n\r\n[Advice]\r\n\r\nI am a dew/glow chaser. I use my prescription Tret, I exfoliate, I brighten... and I skin flood and use barrier-repairing moisturizers and glowy Korean sunscreens. So, yeah, I love the glow.\r\n\r\nBut, occasionally, I'll find I'm looking a touch too shiny on somewhere like the nose or the very upper forehead. I am never going to be a full-on matte person, but I'm curious if y'all have any product recommendations that can help you take down the shine in a hyper-targeted area without going full on matte and without requiring makeup.\r\n\r\nOn days in which I'm wearing makeup, the combo of my Hourglass Veil Translucent Setting Powder and/or my Pat McGrath Blurring Under Eye Powder (which is also great for targeted placement anywhere on the face) will do the trick. But I don't want to be using those on non-makeup days.\r\n\r\nI've been seeing these Korean lavender gel \"powders\" on my FYP later. They don't even actually look like traditional loose or pressed powder... but they seem designed for this type of thing.\r\n\r\nAny suggestions? They don't have to be at Sephora. (Oh, and, I have a tan/medium complexion, so don't want something that will leave a grey/white cast, like the Laneige powder)",
+      "gold": "advice_request",
+      "predicted": "advice_request"
+    },
+    {
+      "text": "Influence/Deinfluence me?\r\n\r\nHi guys!\r\n\r\nI'm planning my Christmas List and I'm seeking your opinions on these products?\r\n\r\nI have combination, sensitive skin type!\r\n\r\nThank you for any guidance \u2e1c(\uff61\u02c3 \u1d55 \u02c2 )\u2e1d\u2661\r\n\r\nProducts:\r\n\r\nTower 28 Swipe Foundation\r\nMakeup By Mario SurrealSkin Luminous Hydrating Foundation\r\nDanessa Myricks Beauty Yummy Skin Serum Skin Tint\r\nTower 28 Swipe Serum Concealer\r\nr.e.m.beauty Eclipse Cheek and Lip Stick\r\nabout-face Blush Rush Liquid Blush\r\nMakeup by Mario Master Pigment Pro Pencil\r\nTower 28 GoGo Cooling Shimmer Stick\r\nHalf Magic Beauty Sparklestik 12-Hour Crease-Proof Eye Crayon\r\nREFY Lash Sculpt Mascara\r\nEADEM Le Chou Chou Lip Softening Balm\r\nREFY Tinted Lip Gloss\r\nTower 28 ShineOn Lip Jelly\r\nHuda Beauty Easy Bake Loose Baking & Setting Powder\r\nOne/SIZE Powder Melt Glass Setting Spray\r\nMane It's Giving Body Medium Hot Round Brush 1.5\"",
+      "gold": "advice_request",
+      "predicted": "advice_request"
+    },
+    {
+      "text": "Starting from scratch- what products have changed your life?\r\n\r\n[Discussion]\r\n\r\nHi all! So I don\u2019t use much makeup, but got a rogue code and plan on taking advantage of the discount. I would love to know some of your favorite products for someone who wants to start curating a collection with the best of the . I have normal/occasionally dry skin. The main things I\u2019m looking for are skin care, products that can work to keep my makeup on all day, a good complexion product without being too full coverage, a great concealer to hide my dark under eyes (but one that will work on no makeup days as well), and any only other products you\u2019re able to recommend!\r\n\r\nHere are some things that I am eyeing:\r\n\r\nM.ph Le Skin foundation\r\nDanessa Myricks blurring balm\r\nTower 28 concealer\r\nPatrick ta Blushes and bronzers",
+      "gold": "advice_request",
+      "predicted": "advice_request"
+    },
+    {
+      "text": "In case anyone was wondering what the packaging looks like for the Eadem set\r\n\r\n[PSA]\r\n\r\nVery cute and giftable!",
+      "gold": "product_experience",
+      "predicted": "advice_request"
+    },
+    {
+      "text": "Body Oil Advice\r\n\r\nHas anyone ever tried Patrick Ta\u2019s body oil? The reviews are fairly mixed. The biggest complaint seems to be the packaging. This appeals to me so much due to the beauty of the packaging and I love the scent of the Major Glow Balm, but I am looking for something that\u2019s more of a skincare product than a makeup product for the body. If anyone has a different body oil suggestion, I\u2019d love to hear it-Sephora or not. I\u2019ve tried the Sol de Janeiro one and loved it, but I\u2019m starting to move away from products that are geared more towards summer since fall is approaching.",
+      "gold": "advice_request",
+      "predicted": "advice_request"
+    },
+    {
+      "text": "Kosas soulgazer mascara vs. Ilia limitless lash mascara\r\n\r\nI love clean formulas.\r\n\r\nI've been using kosas for a while and it's pretty good. I have a lot of lashes though and I feel like it can't quite catch my inner corners lashes. It's a thicccc waxy formula so you lowkey need to wipe off the excess before applying it otherwise it's a gooey nightmare. It hold up well but I think by the end of the day it slowly goes down. But it's pretty good for what it does.\r\n\r\nI bought ilia as a backup and haven't used it yet. I've seen some people saying ilia burns the shit out your eyes if you cry so I'm a little concerned about using that lmao... (I only buy mini mascaras cuz it dries out fast and cuz I throw it out every three months cuz I don't wanna get an allergic reaction)\r\n\r\n*Apparently, they both have a peptide that can grow your lashes. Kosas brags about that on their mascara. Personally, I can't really tell but I think I've seen a little difference in growth.\r\n\r\nFor me I love a lot of length and volume I want to make it look like I got a lash lift so I'm wondering which one is better",
+      "gold": "advice_request",
+      "predicted": "product_experience"
+    }
+  ]
+}

@@ -149,43 +149,59 @@ belong to `opinion_complaint`.
 
 **Where the posts came from:**
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+Public text posts from r/Sephora, supplied in chat by the project author.
+Image-only content was not transcribed.
+
+**How I labelled them:** AI-assisted draft labels were suggested for the
+pasted posts using the taxonomy above. The author confirmed reviewing and
+approving the first 24 labels. Later-added rows remain marked
+`needs user review` in `labels.csv`; those labels are not presented as
+author-reviewed or cold-labeled. No cold-labeling has been completed.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `advice_request` | 54 | 75.0% |
+| `product_experience` | 11 | 15.3% |
+| `opinion_complaint` | 7 | 9.7% |
+| **Total** | **72** | **100%** |
+
+This is a partial dataset, not the required 200 examples. `advice_request`
+exceeds the required 70% cap. I proceeded with the available data because of
+time constraints; results should be treated as exploratory, not as evidence
+that the assignment dataset requirements were met.
 
 **Three hard cases**
 
 <!-- Any post that made you pause: what it was, which two labels it could have
      been, and what you chose. These are worth more than the easy 190. -->
 
-**1.**
-> *The post:*
->
-> *Could have been:*
->
-> *I chose, because:*
+These are AI-identified borderline examples; their current labels are
+provisional and await author review.
 
-**2.**
-> *The post:*
+**1.** “Anyone else missing this gem??” describes a favorite setting spray
+from firsthand use but asks whether it will come back in stock.
+> *Could have been:* `product_experience` or `advice_request`
 >
-> *Could have been:*
->
-> *I chose, because:*
+> *Current draft label:* `advice_request`, because the post asks whether the
+> product will return.
 
-**3.**
-> *The post:*
+**2.** “Kosas soulgazer mascara vs. Ilia limitless lash mascara” describes
+firsthand experience with one mascara and asks which of two options is better.
+> *Could have been:* `product_experience` or `advice_request`
 >
-> *Could have been:*
+> *Current draft label:* `advice_request`, because its main purpose appears
+> to be choosing between products.
+
+**3.** “Heads up if you were planning to buy Haus Labs concealer during the
+sale” reports a broken applicator, asks how to get product out, and later
+describes a positive customer-service resolution.
+> *Could have been:* `product_experience`, `advice_request`, or
+> `opinion_complaint`
 >
-> *I chose, because:*
+> *Current draft label:* `opinion_complaint`, because the main point appears
+> to be reporting a product packaging failure and its effect on the purchase.
 
 ---
 
@@ -193,16 +209,26 @@ Say so plainly — the disclosure is required, not penalised. -->
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Settings:** 3 epochs, learning rate `2e-5`, batch size 16, seed 42,
+maximum length 128. Device: CPU (`torch 2.14.1+cpu`).
 
-**Anything I changed from the defaults, and why:**
+**Anything I changed from the defaults, and why:** No hyperparameters changed.
+The notebook label map was configured for this project's three labels.
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+**Split sizes:** 50 train / 11 validation / 11 test. Test labels: 8
+`advice_request`, 2 `product_experience`, 1 `opinion_complaint`. These latter
+two supports are too small for stable per-label metrics.
 
+**Run result:** Accuracy 0.727; macro F1 0.281. Per-label F1: 0.842
+(`advice_request`), 0.000 (`product_experience`), and 0.000
+(`opinion_complaint`). The model predicted every test post as `advice_request`,
+so the accuracy is misleading under this imbalanced dataset. The run was
+exploratory and does not establish that the acceptance criteria are met.
+`results.json` and `test_split.csv` contain the saved metrics and held-out
+examples. The notebook's data check flagged the 75% advice-request share
+above the assignment limit, but the run was continued at the author's request.
 
 
 ---
@@ -218,17 +244,34 @@ of next unit's variance. -->
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I pasted r/Sephora posts and asked for help putting
+  them into the CSV.
+- *What came back:* AI-suggested draft labels and notes identifying borderline
+  cases or omitted image content.
+- *What I changed:* The first 24 labels were reviewed and approved by me.
+  Later-added suggestions remain marked for review in the CSV.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I asked whether the current CSV was labeled and formatted
+  correctly.
+- *What came back:* A check of its CSV structure, fields, labels, and obvious
+  duplicates, plus a report of missing project requirements.
+- *What I changed:* I continued supplying posts and approved continuing with
+  the dataset I had available; I did not claim the requirements were met.
+
+The assistant reported that the pre-improvement model predicted every
+held-out post as `advice_request`. I chose class-weighted loss as one
+improvement. The assistant configured the notebook label map and training
+change, then ran the training/evaluation cells with the project's `.venv`.
+Metrics and held-out splits are saved as project files; live cell outputs and
+execution counts are not embedded in the notebook.
 
 **Pre-labelling disclosure:**
+
+AI suggested labels for posts I pasted; I reviewed and approved the first 24.
+The remaining later-added rows are still flagged as requiring my review.
+No rows are marked cold because I did not complete the cold-labeling task.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
@@ -239,25 +282,27 @@ of next unit's variance. -->
 
 ## Baseline vs. Trained
 
-<!-- Both models on the same posts. `python baseline.py --trained results.json`
-     prints this table for you. -->
+<!-- Both models were scored on the same 11 rows in test_split.csv. -->
 
-| Measure | Baseline | Trained | Difference |
-|---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Measure | Baseline | Trained (seed 42) | Difference |
+|---|---:|---:|---:|
+| Overall accuracy | 0.727 | 0.727 | +0.000 |
+| Macro F1 | 0.733 | 0.281 | -0.453 |
+| F1 — `advice_request` | 0.800 | 0.842 | +0.042 |
+| F1 — `product_experience` | 0.400 | 0.000 | -0.400 |
+| F1 — `opinion_complaint` | 1.000 | 0.000 | -1.000 |
 
-**What I predicted before I looked:**
-<!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
-     prediction made afterwards isn't one. -->
+The baseline used `facebook/bart-large-mnli` and the definitions in
+`label_definitions.txt`; `baseline_results.json` confirms the held-out set
+was used.
 
-**What the gap actually means:**
-<!-- If the baseline matched your trained model, your fine-tuning added
-     nothing — and that is a real finding, not a failure. Say it plainly. -->
+**What I predicted before I looked:** I did not record a prediction before
+seeing the results, so I cannot honestly reconstruct one after the fact.
 
-
+**What the gap actually means:** The models tied on accuracy for these 11
+posts, but the zero-shot baseline had much higher macro F1. The trained model
+predicted every test post as `advice_request`; the tied accuracy therefore
+hides its failure to identify the two minority labels.
 
 ---
 
@@ -267,30 +312,29 @@ of next unit's variance. -->
      spread table; the Target and Verdict columns are yours. -->
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
-|---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+|---|---|---:|---:|---:|---|
+| 1. Overall accuracy | ≥ 0.65 | 0.727 | 0.727 | 0.727 | MET |
+| 2. Every label F1 | ≥ 0.55 | min 0.000 | min 0.000 | min 0.000 | MISSED |
+| 3. Dataset balance | max share ≤ 50% | 75.0% | 75.0% | 75.0% | MISSED |
+| 4. Labeling consistency | agreement ≥ 80% on 30 | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
+| 5. `advice_request` recall | ≥ 0.65 | 1.000 | 1.000 | 1.000 | MET |
 
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
-|---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| True \ Predicted | `advice_request` | `product_experience` | `opinion_complaint` |
+|---|---:|---:|---:|
+| `advice_request` | 8 | 0 | 0 |
+| `product_experience` | 2 | 0 | 0 |
+| `opinion_complaint` | 1 | 0 | 0 |
 
-**My biggest off-diagonal number, and what it means:**
-<!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
-     direction. "7 real analysis posts were called hot_take and only 3 went the
-     other way" is a direction, not just an error rate. -->
-
-
+**My biggest off-diagonal number, and what it means:** Two real
+`product_experience` posts were called `advice_request`, and the one
+`opinion_complaint` post was also called `advice_request`. This is consistent
+with the model defaulting to the majority label rather than learning the
+minority-category boundaries.
 
 ---
 
@@ -301,24 +345,26 @@ of next unit's variance. -->
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.65 on all three seeds | MET | All three pre-improvement runs scored 0.727. |
+| 2 | Every label F1 | ≥ 0.55 on all labels | MISSED | All three runs had F1 0.000 for `product_experience` and `opinion_complaint`. |
+| 3 | Dataset balance | No label over 50% | MISSED | 54 of 72 rows are `advice_request` (75.0%). |
+| 4 | Labeling consistency | ≥ 80% agreement on 30 posts | NOT TESTED | My independent labels and the staff answer file were not available; the assignment's personal labeling step remains incomplete. |
+| 5 | `advice_request` recall | ≥ 0.65 on all three seeds | MET | All three pre-improvement runs had recall 1.000 for this label. |
 
 **Diagnoses**
 
-<!-- For each miss: the cause, and how you know. The four common causes are:
-     too few examples for a label, a boundary you applied inconsistently, a
-     genuinely hard label pair, and a task the model can't reach from this
-     much data.
-
-     ⚠️ Use your agreement report as evidence. It is the only instrument you
-     have that can tell a LABELLING problem from a MODEL problem, and this
-     section is graded on whether you used it that way. -->
-
-
+- **Criterion 2:** The strongest supported cause is too few minority-label
+  examples combined with class imbalance: only 11 posts are
+  `product_experience` and 7 are `opinion_complaint`; the held-out seed-42 set
+  contains only 2 and 1, respectively. The confusion matrix shows all three
+  were predicted as `advice_request`. The agreement check was not completed,
+  so I cannot claim whether inconsistent annotation also contributed.
+- **Criterion 3:** This is a direct count failure, not a model metric:
+  `advice_request` is 75% of 72 rows, above both the criterion's 50% target
+  and the assignment's 70% cap. I did not have time to collect and review more
+  minority-label posts.
+- **Criterion 4:** No verdict is possible without 30 independent labels and
+  the staff key. I did not complete that personal labeling step.
 
 ---
 
@@ -330,47 +376,19 @@ of next unit's variance. -->
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** NOT TESTED. The assignment requires me to label all 30
+staff posts independently before seeing the staff labels. I chose not to
+complete this step, and `data/staff_labels.csv` was not present in the repo.
+`my_staff_labels.csv` is only an empty-label template, not a completed
+annotation file.
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
      of the 30 were chosen because they're genuinely ambiguous — you should be
      winning some of these. -->
 
-**Disagreements**
-
-<!-- Three lines each: the post, both labels, and who you think is right and
-     why — grounded in the staff definitions you were both applying.
-
-     Then sort each into one of three piles:
-       (a) the rule covered it and I applied it loosely → a consistency problem
-       (b) the rule genuinely doesn't say               → a gap in the definitions
-       (c) the rule is ambiguous here and my reading is defensible → argue it.
-           This is a legitimate win.
-
-     Pile (a) is the one that matters most for your diagnosis: if you applied a
-     written rule two different ways on 30 posts, that is direct evidence about
-     what you did across your own 200. -->
-
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**What the pattern in my disagreements tells me:**
+**Disagreements:** Not available; no comparison was run. No disagreements or
+adjudications are claimed.
 
 
 
@@ -378,40 +396,61 @@ of next unit's variance. -->
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** I enabled class-weighted cross-entropy training. The
+training split's class weights are inverse to each label's frequency
+(`n_train / (number_of_labels × label_count)`). This was the one change; the
+data, splits, model, seed list, and other settings were unchanged.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** Before the change, the model predicted all
+11 seed-42 test posts as `advice_request`; the training split had few examples
+of the minority labels. Weighting was chosen to counter the observed
+majority-class collapse, not to claim the dataset imbalance had been fixed.
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.65 | 0.818 | 0.182 | 0.455 | MISSED |
+| 2. Every label F1 | ≥ 0.55 | min 0.000 | min 0.000 | min 0.000 | MISSED |
+| 3. Dataset balance | max share ≤ 50% | 75.0% | 75.0% | 75.0% | MISSED |
+| 4. Labeling consistency | agreement ≥ 80% on 30 | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
+| 5. `advice_request` recall | ≥ 0.65 | 1.000 | 0.000 | 0.500 | MISSED |
 
-**Did it help, and how do I know:**
-
-<!-- If it didn't, say so. Relabelling that didn't help is a genuinely
-     interesting result and earns full credit. -->
-
-
+**Did it help, and how do I know:** It helped macro F1 slightly on average
+(0.281 before, 0.346 after), but hurt average accuracy (0.727 before, 0.485
+after) and made results highly seed-sensitive. It did not solve the issue:
+the three test sets are tiny, and the training data still contains only seven
+`opinion_complaint` examples.
 
 ---
 
 ## What's Still Broken
 
-<!-- For each criterion still missed: what you'd do, and why you stopped. -->
-
-
+1. **Overall accuracy after the improvement:** Seed 7 and seed 2024 missed
+   0.65. I would gather and review more examples before more training; I
+   stopped because of time.
+2. **Per-label F1:** Every seed had at least one label with F1 0.000. I would
+   add genuine examples for the thin labels, review their annotations, and
+   repeat trials; I stopped because I did not have time to collect and review
+   that data.
+3. **Dataset balance:** `advice_request` is 75%, above the 50% criterion and
+   70% assignment cap. I would collect more real posts from the other labels
+   and personally review them; I stopped at 72 posts because of time.
+4. **Labeling consistency:** Not tested. I would label the staff set myself,
+   then obtain the staff key and adjudicate disagreements; I stopped before
+   that required independent labeling step.
+5. **Advice-request recall after the improvement:** Seeds 7 and 2024 were
+   below 0.65. I would investigate the effect of weighting on minority and
+   majority predictions using a larger, balanced dataset; I stopped after the
+   single measured improvement.
 
 **The gap between what I meant my labels to capture and what the model
 learned:**
-<!-- Two sentences. Your confusion matrix is the evidence. -->
-
-
+I intended the model to distinguish advice-seeking, firsthand product
+experiences, and opinions or complaints, but before the improvement it
+classified every held-out post as `advice_request`. After class weighting its
+predictions varied sharply by seed, which suggests that the very small
+minority-label samples are not enough for stable boundaries.
 
 <!-- ═════════════════════════════════════════════════════════════════════
 
